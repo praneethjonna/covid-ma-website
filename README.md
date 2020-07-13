@@ -19,10 +19,19 @@ The remainder of this README will provide details on how things are structured w
 1. Update the GA Tracker code in this file `src\views\partials\scripts.ejs`
 2. Search for UA-XXXXXXXX-X and replace it with your GA ID  
 
+## Installation
+Perform the below step on the root folder
+```bash
+  npm install 
+ ```
+
 ## Run locally
 
 Run to start the web app
   ```bash
+  npm run build
+  ```
+    ```bash
   npm run start
   ```
 To watch changes, live reload and linting
@@ -30,6 +39,4 @@ To watch changes, live reload and linting
   npm run dev
   ```
 
-## Installation
 
-- `npm install` on the root folder
