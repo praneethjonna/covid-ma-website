@@ -31,7 +31,7 @@ Run to start the web app
   ```bash
   npm run build
   ```
-    ```bash
+  ```bash
   npm run start
   ```
 To watch changes, live reload and linting
