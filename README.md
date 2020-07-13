@@ -21,15 +21,15 @@ The remainder of this README will provide details on how things are structured w
 
 ## Run locally
 
-- Run to start the web app
+Run to start the web app
   ```bash
   npm run start
   ```
-  To watch changes, live reload and linting
+To watch changes, live reload and linting
   ```bash
   npm run dev
   ```
 
-## installation
+## Installation
 
 - `npm install` on the root folder
