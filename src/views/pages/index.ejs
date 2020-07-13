@@ -1,0 +1,101 @@
+<!--Home page of the application -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Covid-19 Quick Guide</title>
+	<%- include('../partials/head') %>
+</head>
+
+<body>
+	<%- include('../partials/scripts') %>
+	<div class="container">
+		<div class="d-flex w-100 mx-auto flex-column">
+
+			<%- include('../partials/header') %>
+			<div>
+				
+				<img src="https://www.mass.gov/files/styles/hero1600x800/public/homepage-search-background-images/statehouse-downtown-home-hero-min.jpg"
+					style="max-width: 100%; max-height: 100%;" alt="covid-19"></img>
+			</div>
+			<main role="main">
+				<h1 class="cover-heading">COVID-19 Updates and Information</h1>
+				<p class="lead">Everything you need to know about COVID-19 in Massachusetts.</p>
+				<div class="content ma__sticky-toc__links">
+					<div class="ma__sticky-toc__link" data-link="#daily-updates-">
+						<a href="/content?id=dashboard">
+							<svg
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="35" height="35"
+								viewBox="0 0 35 35">
+								<path class="st0"
+									d="M17.5 35C7.8 35 0 27.2 0 17.5 0 7.8 7.8 0 17.5 0 27.2 0 35 7.8 35 17.5 35 27.2 27.2 35 17.5 35zM16 9l-3 2.9 5.1 5.1L13 22.1l3 2.9 8-8L16 9z">
+								</path>
+							</svg>
+							Latest Covid-19 Dashboard
+						</a>
+					</div>
+					<div class="ma__sticky-toc__link" data-link="#daily-updates-"><a href="/content?id=essential"><svg
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="35" height="35"
+								viewBox="0 0 35 35">
+								<path class="st0"
+									d="M17.5 35C7.8 35 0 27.2 0 17.5 0 7.8 7.8 0 17.5 0 27.2 0 35 7.8 35 17.5 35 27.2 27.2 35 17.5 35zM16 9l-3 2.9 5.1 5.1L13 22.1l3 2.9 8-8L16 9z">
+								</path>
+							</svg>
+							Essential Services
+						</a>
+					</div>
+					<div class="ma__sticky-toc__link" data-link="#daily-updates-">
+						<a href="/content?id=testing">
+							<svg
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="35" height="35"
+								viewBox="0 0 35 35">
+								<path class="st0"
+									d="M17.5 35C7.8 35 0 27.2 0 17.5 0 7.8 7.8 0 17.5 0 27.2 0 35 7.8 35 17.5 35 27.2 27.2 35 17.5 35zM16 9l-3 2.9 5.1 5.1L13 22.1l3 2.9 8-8L16 9z">
+								</path>
+							</svg> Testing sites
+						</a>
+					</div>
+					<div class="ma__sticky-toc__link" data-link="#daily-updates-">
+						<a href="/content?id=sbs">
+							<svg
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="35" height="35"
+								viewBox="0 0 35 35">
+								<path class="st0"
+									d="M17.5 35C7.8 35 0 27.2 0 17.5 0 7.8 7.8 0 17.5 0 27.2 0 35 7.8 35 17.5 35 27.2 27.2 35 17.5 35zM16 9l-3 2.9 5.1 5.1L13 22.1l3 2.9 8-8L16 9z">
+								</path>
+							</svg>
+							Small business network information
+						</a>
+					</div>
+					<div class="ma__sticky-toc__link" data-link="#daily-updates-">
+						<a href="/content?id=schools">
+							<svg
+								xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="35" height="35"
+								viewBox="0 0 35 35">
+								<path class="st0"
+									d="M17.5 35C7.8 35 0 27.2 0 17.5 0 7.8 7.8 0 17.5 0 27.2 0 35 7.8 35 17.5 35 27.2 27.2 35 17.5 35zM16 9l-3 2.9 5.1 5.1L13 22.1l3 2.9 8-8L16 9z">
+								</path>
+							</svg>
+						    Fall schools reopening
+						</a>
+					</div>
+				</div>
+				<br/>
+				<p class="lead">
+					<a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+				</p>
+			</main>
+
+			<%- include('../partials/footer') %>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$(".home").addClass("active");
+		})
+		ga('send', 'pageview', location.pathname);
+	</script>
+</body>
+
+</html>

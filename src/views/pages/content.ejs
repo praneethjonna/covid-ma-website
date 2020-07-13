@@ -1,0 +1,144 @@
+<!-- Page that displays pdf files in the browser -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Covid-19 Quick Guide</title>
+	<%- include('../partials/head') %>
+</head>
+
+<body>
+	<%- include('../partials/scripts') %>
+	<div class="container">
+		<div class="d-flex w-100  p-3 mx-auto flex-column">
+
+			<%- include('../partials/header') %>
+
+			<main role="main">
+				<div id="adobe-dc-view" class="viewer"></div>
+			</main>
+
+			<%- include('../partials/footer') %>
+		</div>
+	</div>
+	<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+
+	<script type="text/javascript">
+
+		$(window).on('load', function () {
+
+			$(".content").addClass("active");
+
+			$(".viewer").height($(window).height() - 130);
+
+			$(window).resize(function () {
+				$('.viewer').height($(window).height() - 130);
+			});
+
+			$(window).trigger('resize');
+
+			//Retrieve id and convert into pdf name
+			let contentId = getUrlVars()["id"];
+			let documentName = "covid-19-dashboard-7-10-2020.pdf";
+			if(contentId == "dashboard"){
+				documentName = "covid-19-dashboard-7-10-2020.pdf";
+			}else if(contentId == "essential"){
+				documentName = "covid-19-essential-services.pdf";
+			}else if(contentId == "testing"){
+				documentName = "covid-19-MA-DPH-Test-Sites-July.pdf";
+			}else if(contentId == "sbs"){
+				documentName = "COVID-19-sbs-Network.pdf";
+			}else if(contentId == "schools"){
+				documentName = "covid-19-fall-reopening.pdf";
+			}else{
+				//redirect to error page of the query string is not applicable
+				window.location.replace("http://covid19.mass.gov:8080/error");
+			}
+
+			let clientId = "f35bacf45b36427a96606652529250e0";
+			let activeViewMode = "FULL_WINDOW";
+
+			if (typeof window.AdobeDC == 'undefined') {
+				//the flag was not found, so the code has not run
+				$.getScript('https://documentcloud.adobe.com/view-sdk/main.js');
+			}
+
+			function getUrlVars() {
+				var vars = [], hash;
+				var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+				for (var i = 0; i < hashes.length; i++) {
+					hash = hashes[i].split('=');
+					vars.push(hash[0]);
+					vars[hash[0]] = hash[1];
+				}
+				return vars;
+			}
+
+			function adobeEventFunction(mode) {
+				var adobeDCView = new AdobeDC.View({
+					clientId: clientId,
+					divId: 'adobe-dc-view',
+				});
+
+				adobeDCView.previewFile({
+					content: {
+						location: {
+							url: "assets/"+documentName,
+						},
+					},
+					metaData: { fileName: documentName }
+				}, { defaultViewMode: "FIT_WIDTH", showLeftHandPanel: false, embedMode: mode });
+
+				adobeDCView.registerCallback(
+
+					AdobeDC.View.Enum.CallbackType.EVENT_LISTENER,
+					function (event) {
+						let fileName = event.data.fileName;
+						if (event.type == "DOCUMENT_OPEN") {
+							ga('send', 'event', 'DOCUMENT_OPEN', 'PDF Opened', 'file name: ' + fileName);
+
+						}
+						else if (event.type == "PAGE_VIEW") {
+							let data = 'page number: ' + event.data.pageNumber + ' file name: ' + fileName;
+							ga('send', 'event', 'PAGE_VIEW', 'PDF Reviewed', data);
+
+						}
+						else if (event.type == "DOCUMENT_DOWNLOAD") {
+							ga('send', 'event', 'DOCUMENT_DOWNLOAD', 'PDF downloaded', 'file name: ' + fileName);
+
+						}
+						else if (event.type == "TEXT_COPY") {
+							let data = 'copied text: ' + event.data.copiedText + ' file name: ' + fileName;
+							ga('send', 'event', 'TEXT_COPY', 'On copying any text from a  PDF', data);
+
+						}
+					}, {
+					enablePDFAnalytics: true,
+				}
+				);
+			};
+
+			//add adobe pdf viewer event listener to the page
+			function addAdobeEventListner(mode) {
+
+				adobeEventFunction(mode);
+				let clientId = "40dde91299a34e25949d8da48fd2fc7d";
+				document.addEventListener("adobe_dc_view_sdk.ready", adobeEventFunction(mode));
+			};
+
+			//remove adobe pdf viewer event listener to the page
+			function removeAdobeEventListner(mode) {
+				document.removeEventListener("adobe_dc_view_sdk.ready", adobeEventFunction(mode));
+			};
+
+			//adobe pdf viewer event listener logic
+			addAdobeEventListner(activeViewMode);
+
+
+		});
+
+		ga('send', 'pageview', window.location.href);
+	</script>
+</body>
+
+</html>
