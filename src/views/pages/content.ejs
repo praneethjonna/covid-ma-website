@@ -38,8 +38,8 @@
 			$(window).trigger('resize');
 
 			//Retrieve id and convert into pdf name
-			let contentId = getUrlVars()["id"];
-			let documentName = "covid-19-dashboard-7-10-2020.pdf";
+			let contentId = getUrlVars()["id"] == null? 'dashboard': getUrlVars()["id"];
+			let documentName = "dashboard";
 			if(contentId == "dashboard"){
 				documentName = "covid-19-dashboard-7-10-2020.pdf";
 			}else if(contentId == "essential"){
